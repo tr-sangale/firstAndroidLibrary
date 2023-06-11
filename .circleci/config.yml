@@ -24,22 +24,22 @@ jobs:
     steps:
       - checkout
 
-      # Download and cache dependencies
-      - restore_cache:
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "firstAndroidLibrary/build.gradle" }}
+      # # Download and cache dependencies
+      # - restore_cache:
+      #     key: jars-{{ checksum "build.gradle" }}-{{ checksum  "firstAndroidLibrary/build.gradle" }}
 
       - run: 
           name: change the permission
           command: chmod +x ./gradlew
 
-      - run: 
-          name: download gradle dependencies
-          command: ./gradlew androidDependencies 
+      # - run: 
+      #     name: download gradle dependencies
+      #     command: ./gradlew androidDependencies 
 
-      - save_cache:
-          paths:
-            - ~/.gradle
-          key: jars-{{ checksum "build.gradle" }}-{{ checksum  "firstAndroidLibrary/build.gradle" }}
+      # - save_cache:
+      #     paths:
+      #       - ~/.gradle
+      #     key: jars-{{ checksum "build.gradle" }}-{{ checksum  "firstAndroidLibrary/build.gradle" }}
 
       # build the androidlib
       - run: 
