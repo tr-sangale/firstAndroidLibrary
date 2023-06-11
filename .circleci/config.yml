@@ -32,6 +32,12 @@ jobs:
           name: change the permission
           command: chmod +x ./gradlew
 
+      - run:
+          name: Set up environment variables
+          command: |
+            echo "GPR_USER=${GPR_USER}" >> $BASH_ENV
+            echo "GPR_API_KEY=${GPR_API_KEY}" >> $BASH_ENV
+
       # - run: 
       #     name: download gradle dependencies
       #     command: ./gradlew androidDependencies 
@@ -42,6 +48,7 @@ jobs:
       #     key: jars-{{ checksum "build.gradle" }}-{{ checksum  "firstAndroidLibrary/build.gradle" }}
 
       # build the androidlib
+     
       - run: 
           name: build project
           command: ./gradlew clean build
