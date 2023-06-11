@@ -31,17 +31,17 @@ def githubProperties = new Properties()
 githubProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
 def getVersionName = { ->
-    return "1.0.2" // Replace with version Name
+    return "1.0.0" // Replace with version Name
 }
 
 def getArtifactId = { ->
-    return "sampleAndroidLib" // Replace with library name ID
+    return "firstlibrary" // Replace with library name ID
 }
 
 publishing {
     publications {
-        bar(MavenPublication) {
-            groupId 'com.enefce.libraries'
+        maven(MavenPublication) {
+            groupId 'com.example'
             artifactId getArtifactId()
             version getVersionName()
             artifact("$buildDir/outputs/aar/${getArtifactId()}-release.aar")
