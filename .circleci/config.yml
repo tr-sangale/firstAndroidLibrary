@@ -94,6 +94,7 @@ jobs:
       - run:
           name: Build and deploy package
           command: |
+            chmod +x ./gradlew
             ./gradlew assemblyRelease publish
 
 
