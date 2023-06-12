@@ -60,7 +60,7 @@ jobs:
  
   android-test:
     # docker:
-    #   # specify the version you desire here
+    #   # specify the version you desire her
     #   - image: cimg/android:2023.06
     executor: 
       name: android/android-machine
