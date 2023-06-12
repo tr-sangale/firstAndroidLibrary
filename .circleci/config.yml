@@ -64,7 +64,7 @@ jobs:
     #   - image: cimg/android:2023.06
     executor: 
       name: android/android-machine
-      tag: "202102-01"
+      tag: 2021.10.01
       resource-class: large
 
 
