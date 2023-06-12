@@ -62,9 +62,9 @@ jobs:
     # docker:
     #   # specify the version you desire here
     #   - image: cimg/android:2023.06
-    executor:
+    executor: 
       name: android/android-machine
-      tag: "202106-01"
+      tag: "202102-01"
       resource-class: large
 
 
@@ -75,9 +75,9 @@ jobs:
       - run:
           name: installing emulator and Running Instrumentation tests
           command:  |
-            sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
-            sdkmanager "system-images;android-29;google_apis;x86"
-            echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
+            sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.0" "emulator"
+            sdkmanager "system-images;android-30;google_apis;x86"
+            echo no | avdmanager create avd -n test-emulator -k "system-images;android-30;google_apis;x86"
             emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
             adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
             adb shell wm dismiss-keyguard
