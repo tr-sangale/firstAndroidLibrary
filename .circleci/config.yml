@@ -72,6 +72,14 @@ jobs:
 
     steps:
       - checkout
+      - run: 
+          name: upgrading jdk
+          command: |
+            apt-get update
+            apt install openjdk-17-jdk openjdk-17-jre
+            export JAVA_HOME=/opt/jdk17
+            export PATH=$PATH:$JAVA_HOME/bin
+            
       - run:
           name: installing emulator and Running Instrumentation tests
           command:  |
