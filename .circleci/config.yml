@@ -59,10 +59,13 @@ jobs:
           command: ./gradlew test
  
   android-test:
-    executor:
-      name: android/android-machine
-      tag: "202106-02"
-      resource-class: large
+    docker:
+      # specify the version you desire here
+      - image: cimg/android:2023.06
+    # executor:
+    #   name: android/android-machine
+    #   tag: "202106-02"
+    #   resource-class: large
 
 
     #run instrumentation tests
