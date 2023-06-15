@@ -23,6 +23,9 @@ jobs:
 
     steps:
       - checkout
+      - run: 
+          name: change the permission
+          command: chmod +x ./gradlew
 
       # # Download and cache dependencies
       - restore_cache:
@@ -38,10 +41,6 @@ jobs:
           paths:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
-
-      - run: 
-          name: change the permission
-          command: chmod +x ./gradlew
 
       - run:
           name: Set up environment variables
