@@ -102,11 +102,11 @@ jobs:
       - image: cimg/android:2023.06
     steps:
       - checkout
-      - run:
-          name: Set up environment variables
-          command: |
-            echo "GPR_USER=${GPR_USER}" >> $BASH_ENV
-            echo "GPR_API_KEY=${GPR_API_KEY}" >> $BASH_ENV
+      # - run:
+          # name: Set up environment variables
+          # command: |
+          #   echo "GPR_USER=${GPR_USER}" >> $BASH_ENV
+          #   echo "GPR_API_KEY=${GPR_API_KEY}" >> $BASH_ENV
       - run:
           name: Build and deploy package
           command: |
