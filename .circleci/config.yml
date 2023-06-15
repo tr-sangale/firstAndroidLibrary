@@ -105,7 +105,7 @@ jobs:
   deploy:
     working_directory: ~/repo
     docker:
-      - image: cimg/android:2023.02
+      - image: cimg/android:2023.06
     steps:
       - checkout
       - run:
