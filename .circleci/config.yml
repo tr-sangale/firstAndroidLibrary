@@ -129,8 +129,8 @@ jobs:
             chmod +x ./gradlew
             ./gradlew assemble
 
-      # - store_artifacts:
-      #     path: build/outputs/aar
+      - store_artifacts:
+          path: build/outputs/aar
 
       - run:
           name: Build and deploy package
