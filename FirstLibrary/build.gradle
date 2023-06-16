@@ -50,12 +50,12 @@ publishing {
 
     repositories {
         maven {
-            name = "GitHubPackages"
+            name = "GithubPackages"
             url = "https://maven.pkg.github.com/tr-sangale/firstAndroidLibrary"
 
             credentials {
-                username = $GPR_USER
-                password = $GPR_API_KEY
+                credentials.username = System.getenv("GPR_USER")
+                credentials.password = System.getenv("GPR_API_KEY")
             }
         }
     }
