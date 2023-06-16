@@ -127,8 +127,7 @@ jobs:
           name: Build and deploy package
           command: |
             chmod +x ./gradlew
-            ./gradlew assembleRelease 
-            ./gradlew publish -PgithubUsername=$GITHUB_ACTOR -PgithubToken=$GITHUB_TOKEN -i
+            ./gradlew publish
 
 
 workflows:
