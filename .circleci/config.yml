@@ -112,7 +112,7 @@ jobs:
           command: |
             chmod +x ./gradlew
             ./gradlew assembleRelease 
-            ./gradlew publish -PgithubUsername=$GPR_USER -PgithubToken=$GPR_API_KEY
+            ./gradlew publish
 
 
 workflows:
