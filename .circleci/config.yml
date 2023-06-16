@@ -127,13 +127,13 @@ jobs:
           name: Build and deploy package
           command: |
             chmod +x ./gradlew
-            ./gradlew publish
+            ./gradlew assembleRelease publish
 
 
 workflows:
   build-androidTest-deploy:
     jobs:
-      - build
+      # - build
       # - android-test:
           # requires:
           #   - build
