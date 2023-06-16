@@ -102,6 +102,19 @@ jobs:
       - image: cimg/android:2023.06
     steps:
       - checkout
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: 
+          name: download gradle dependencies
+          command: ./gradlew androidDependencies
+
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
       # - run:
           # name: Set up environment variables
           # command: |
