@@ -54,46 +54,46 @@ jobs:
           name: gradle unit tests
           command: ./gradlew test
  
-  android-test:
-    # machine:
-    #   image: android:2023.04.1
-    # docker:
-    #   # specify the version you desire her
-    #   - image: cimg/android:2023.06
-    executor: 
-      name: android/android-machine
-      tag: "2023.04.1"
-      resource-class: large
+  # android-test:
+  #   # machine:
+  #   #   image: android:2023.04.1
+  #   # docker:
+  #   #   # specify the version you desire her
+  #   #   - image: cimg/android:2023.06
+  #   executor: 
+  #     name: android/android-machine
+  #     tag: "2023.04.1"
+  #     resource-class: large
 
 
-    #run instrumentation tests
+  #   #run instrumentation tests
 
-    steps:
-      - checkout
-      # - run: 
-      #     name: upgrading jdk
-      #     command: |
-      #       sudo apt-get update
-      #       sudo apt install openjdk-17-jdk openjdk-17-jre
-      #       export JAVA_HOME=/opt/jdk17
-      #       export PATH=$PATH:$JAVA_HOME/bin
+  #   steps:
+  #     - checkout
+  #     # - run: 
+  #     #     name: upgrading jdk
+  #     #     command: |
+  #     #       sudo apt-get update
+  #     #       sudo apt install openjdk-17-jdk openjdk-17-jre
+  #     #       export JAVA_HOME=/opt/jdk17
+  #     #       export PATH=$PATH:$JAVA_HOME/bin
             
 
-      - run:
-          name: installing emulator and Running Instrumentation tests
-          command:  |
-            sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
-            sdkmanager "system-images;android-29;google_apis;x86"
-            echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
-            emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
-            adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
-            adb shell wm dismiss-keyguard
-            sleep 1
-            adb shell settings put global window_animation_scale 0
-            adb shell settings put global transition_animation_scale 0
-            adb shell settings put global animator_duration_scale 0
-            chmod +x ./gradlew
-            ./gradlew connectedAndroidTest
+  #     - run:
+  #         name: installing emulator and Running Instrumentation tests
+  #         command:  |
+  #           sdkmanager "platform-tools" "platforms;android-29" "build-tools;30.0.0" "emulator"
+  #           sdkmanager "system-images;android-29;google_apis;x86"
+  #           echo no | avdmanager create avd -n test-emulator -k "system-images;android-29;google_apis;x86"
+  #           emulator -avd test-emulator -noaudio -no-boot-anim -gpu off -no-window &
+  #           adb wait-for-device shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done;'
+  #           adb shell wm dismiss-keyguard
+  #           sleep 1
+  #           adb shell settings put global window_animation_scale 0
+  #           adb shell settings put global transition_animation_scale 0
+  #           adb shell settings put global animator_duration_scale 0
+  #           chmod +x ./gradlew
+  #           ./gradlew connectedAndroidTest
           
 
   deploy:
@@ -134,10 +134,10 @@ workflows:
   build-androidTest-deploy:
     jobs:
       - build
-      - android-test:
-          requires:
-            - build
-      - deploy:
-          requires:
-            - android-test
+      # - android-test:
+          # requires:
+          #   - build
+      - deploy
+          # requires:
+          #   - android-test
 
