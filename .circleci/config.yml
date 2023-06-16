@@ -112,7 +112,7 @@ jobs:
           command: |
             chmod +x ./gradlew
             ./gradlew assembleRelease 
-            ./gradlew publish
+            ./gradlew publish -PgithubUsername=$GITHUB_ACTOR -PgithubToken=$GITHUB_TOKEN -i
 
 
 workflows:
