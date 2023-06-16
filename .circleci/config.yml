@@ -127,7 +127,8 @@ jobs:
           name: Build and deploy package
           command: |
             chmod +x ./gradlew
-            ./gradlew assembleRelease publish
+            ./gradlew assembleRelease
+            ./gradlew publish
 
 
 workflows:
