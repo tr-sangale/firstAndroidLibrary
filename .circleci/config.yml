@@ -102,6 +102,9 @@ jobs:
       - image: cimg/android:2023.06
     steps:
       - checkout
+      - run: 
+          name: change the permission
+          command: chmod +x ./gradlew
       - restore_cache:
           keys:
             - v1-dependencies-{{ checksum "build.gradle" }}
