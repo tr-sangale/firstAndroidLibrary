@@ -52,8 +52,6 @@ publishing {
         maven {
             name = "GithubPackages"
             url = "https://maven.pkg.github.com/tr-sangale/firstAndroidLibrary"
-            
-            @Optional
             credentials {
                 credentials.username = System.getenv("GPR_USER")
                 credentials.password = System.getenv("GPR_API_KEY")
