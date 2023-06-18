@@ -41,30 +41,15 @@ android {
 // def githubProperties = new Properties()
 //githubProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
-def getVersionName = { ->
-    def gitDescribeOutput = "git describe --tags --abbrev=0".execute().text.trim()
-    def gitCommitCount = "git rev-list --count HEAD".execute().text.trim()
+def getGitVersion() {
     def gitBranchName = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
+    def gitCommitCount = "git rev-list --count HEAD".execute().text.trim()
 
-    if (gitDescribeOutput.isEmpty()) {
-        return "0.1.0-SNAPSHOT"
+    if (gitBranchName.isEmpty()) {
+        return "0.0.1-SNAPSHOT"
     }
 
-    def versionParts = gitDescribeOutput.split('-')
-    def version = versionParts[0]
-
-    if (versionParts.length > 1) {
-        def commitCount = Integer.parseInt(versionParts[1])
-        version += ".${commitCount}"
-    }
-
-    if (!gitBranchName.isEmpty()) {
-        version += "-${gitBranchName}"
-    }
-
-    if (!gitCommitCount.isEmpty()) {
-        version += "-${gitCommitCount}"
-    }
+    def version = "NEW-${gitCommitCount}-${gitBranchName}"
 
     return version
 }
