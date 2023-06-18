@@ -124,7 +124,7 @@ jobs:
       #       echo "GPR_USER=${GPR_USER}" >> $BASH_ENV
       #       echo "GPR_API_KEY=${GPR_API_KEY}" >> $BASH_ENV
       - run:
-          name: Build and deploy package
+          name: Build package
           command: |
             chmod +x ./gradlew
             ./gradlew assemble
@@ -133,7 +133,7 @@ jobs:
           path: build/outputs/aar
 
       - run:
-          name: Build and deploy package
+          name: Deploy package
           command: |
             chmod +x ./gradlew           
             ./gradlew publish
