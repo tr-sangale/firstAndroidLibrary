@@ -1,4 +1,6 @@
-import org.gradle.internal.impldep.org.apache.commons.lang.StringUtils
+//import org.gradle.internal.impldep.org.apache.commons.lang.StringUtils
+import org.apache.commons.lang.StringUtils
+
 
 plugins {
     id 'com.android.library'
