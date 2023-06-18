@@ -119,7 +119,7 @@ jobs:
             - ~/.gradle
           key: v1-dependencies-{{ checksum "build.gradle" }}
       # - run:
-      #     name: Set up environment variables
+      #     name: Set up environment variable
       #     command: |
       #       echo "GPR_USER=${GPR_USER}" >> $BASH_ENV
       #       echo "GPR_API_KEY=${GPR_API_KEY}" >> $BASH_ENV
