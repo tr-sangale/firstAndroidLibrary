@@ -41,7 +41,7 @@ android {
 // def githubProperties = new Properties()
 //githubProperties.load(new FileInputStream(rootProject.file("local.properties")))
 
-def getGitVersion() {
+def getGitVersion = { ->
     def gitBranchName = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
     def gitCommitCount = "git rev-list --count HEAD".execute().text.trim()
 
