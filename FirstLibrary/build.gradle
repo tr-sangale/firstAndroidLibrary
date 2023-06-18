@@ -1,5 +1,5 @@
 //import org.gradle.internal.impldep.org.apache.commons.lang.StringUtils
-import org.apache.commons.lang3.StringUtils
+
 
 
 
@@ -46,15 +46,15 @@ def getVersionName = { ->
     def gitCommitCount = "git rev-list --count HEAD".execute().text.trim()
     def gitBranchName = "git rev-parse --abbrev-ref HEAD".execute().text.trim()
 
-    if (StringUtils.isEmpty(gitDescribeOutput)) {
+    if (gitDescribeOutput.isEmpty()) {
         return "0.1.0-SNAPSHOT"
     }
 
     def versionParts = gitDescribeOutput.split('-')
     def version = versionParts[0]
 
-    if (versionParts.size() > 1) {
-        def commitCount = versionParts[1].toInteger()
+    if (versionParts.length > 1) {
+        def commitCount = Integer.parseInt(versionParts[1])
         version += ".${commitCount}"
     }
 
@@ -67,7 +67,6 @@ def getVersionName = { ->
     }
 
     return version
-// Replace with version Name
 }
 
 def getArtifactId = { ->
