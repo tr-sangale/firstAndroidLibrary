@@ -25,6 +25,11 @@ android {
         sourceCompatibility JavaVersion.VERSION_11
         targetCompatibility JavaVersion.VERSION_11
     }
+    publishing{
+        singleVariant('release'){
+            withSourcesJar()
+        }
+    }
 }
 
 // def githubProperties = new Properties()
@@ -44,7 +49,10 @@ publishing {
             groupId 'com.example'
             artifactId getArtifactId()
             version getVersionName()
-            artifact("$buildDir/outputs/aar/${getArtifactId()}-release.aar")
+            afterEvaluate{
+                from components.release
+            }
+            //artifact("$buildDir/outputs/aar/${getArtifactId()}-release.aar")
         }
     }
 
