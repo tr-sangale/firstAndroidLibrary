@@ -1,3 +1,5 @@
+import org.gradle.internal.impldep.org.apache.commons.lang.StringUtils
+
 plugins {
     id 'com.android.library'
     id 'maven-publish'
