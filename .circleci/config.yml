@@ -23,41 +23,36 @@ jobs:
 
     steps:
       - checkout
-      - run:
-          name: Fetch Commit Count
-          command: |
-            COMMIT_COUNT=$(git ls-remote https://github.com/tr-sangale/firstAndroidLibrary refs/head/${CIRCLE_BRANCH} | awk '{ print $1 }' | wc -l)
-            echo "Commit Count: ${COMMIT_COUNT}"
-      # - run: 
-      #     name: change the permission
-      #     command: chmod +x ./gradlew
+      - run: 
+          name: change the permission
+          command: chmod +x ./gradlew
 
-      # # # Download and cache dependencies
-      # - restore_cache:
-      #     keys:
-      #       - v1-dependencies-{{ checksum "build.gradle" }}
-      #       # fallback to using the latest cache if no exact match is found
-      #       - v1-dependencies-
-      # - run: 
-      #     name: download gradle dependencies
-      #     command: ./gradlew androidDependencies
+      # # Download and cache dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "build.gradle" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+      - run: 
+          name: download gradle dependencies
+          command: ./gradlew androidDependencies
 
-      # - save_cache:
-      #     paths:
-      #       - ~/.gradle
-      #     key: v1-dependencies-{{ checksum "build.gradle" }}
+      - save_cache:
+          paths:
+            - ~/.gradle
+          key: v1-dependencies-{{ checksum "build.gradle" }}
    
 
-      # # build the androidlib
+      # build the androidlib
      
-      # - run: 
-      #     name: build project
-      #     command: ./gradlew build
+      - run: 
+          name: build project
+          command: ./gradlew build
 
-      # # run tests!
-      # - run: 
-      #     name: gradle unit tests
-      #     command: ./gradlew test
+      # run tests!
+      - run: 
+          name: gradle unit tests
+          command: ./gradlew test
  
   # android-test:
   #   # machine:
@@ -143,6 +138,23 @@ jobs:
             chmod +x ./gradlew           
             ./gradlew publish
 
+  next-pipeline:
+    working_directory: ~/repo
+    docker:
+      - image: cimg/android:2023.06
+    steps:
+      - checkout 
+      - run:
+          name: Triggering next pipeline
+          command: |
+            curl --location --request POST 'https://circleci.com/api/v2/project/github/tr-sangale/testLibrary/pipeline' \
+            --header 'Content-Type: application/json' \
+            -u "${API_TOKEN}:" \
+            --data-raw '{
+              "branch": "'"${CIRCLE_BRANCH}"'"
+            }
+
+
 
 workflows:
   build-androidTest-deploy:
@@ -154,4 +166,7 @@ workflows:
       - deploy
           # requires:
           #   - android-test
+      - next-pipeline:
+          requires:
+           - deploy 
 
