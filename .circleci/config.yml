@@ -152,7 +152,7 @@ jobs:
             -u "${API_TOKEN}:" \
             --data-raw '{
               "branch": "'"${CIRCLE_BRANCH}"'"
-            }
+            }'
 
 
 
