@@ -49,7 +49,7 @@ def getVersionName = { ->
         return "0.0.1-SNAPSHOT"
     }
 
-    def version = "NEW-${gitCommitCount}-${gitBranchName}"
+    def version = "${gitCommitCount}-${gitBranchName}"
 
     return version
 }
